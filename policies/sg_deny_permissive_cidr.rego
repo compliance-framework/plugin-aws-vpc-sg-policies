@@ -1,15 +1,8 @@
 package compliance_framework.deny_permissive_cidr
 
 violation[{}] if {
-  input.IpPermissions[_].IpRanges[_].CidrIp == "0.0.0.0/0"
-}
-
-violation[{}] if {
-  input.IpPermissions[_].IpRanges[_].CidrIp == "0.0.0.0/1"
-}
-
-violation[{}] if {
-  input.IpPermissions[_].IpRanges[_].CidrIp == "0.0.0.0/2"
+  cidr := data.permissive_ingress_ipv4_cidrs[_]
+  input.security_group.IpPermissions[_].IpRanges[_].CidrIp == cidr
 }
 
 title := "CIDR Ingress should be restricted"

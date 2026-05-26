@@ -24,7 +24,7 @@ help-all: ## Display all help items, ie including plumbing targets
 
 ##@ Policies
 test: ## Test policy files
-	@OPA test policies
+	@$(OPA) test policies
 
 validate: ## Validate policy files
 	@opa check policies

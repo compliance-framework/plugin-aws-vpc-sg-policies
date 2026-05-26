@@ -1,7 +1,8 @@
 package compliance_framework.deny_unrestricted_egress
 
 violation[{}] if {
-  input.IpPermissionsEgress[_].IpRanges[_].CidrIp == "0.0.0.0/0"
+  cidr := data.unrestricted_egress_ipv4_cidrs[_]
+  input.security_group.IpPermissionsEgress[_].IpRanges[_].CidrIp == cidr
 }
 
 title := "Egress should be restricted"

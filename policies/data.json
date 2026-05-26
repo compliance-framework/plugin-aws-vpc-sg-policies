@@ -1,0 +1,38 @@
+{
+  "required_tags": [
+    "Environment",
+    "Owner",
+    "compliance",
+    "confidentiality",
+    "backup",
+    "role"
+  ],
+  "public_ipv4_cidrs": [
+    "0.0.0.0/0"
+  ],
+  "public_ipv6_cidrs": [
+    "::/0"
+  ],
+  "ssh_ports": [
+    22
+  ],
+  "rdp_ports": [
+    3389
+  ],
+  "database_ports": [
+    3306,
+    5432,
+    1433
+  ],
+  "icmp_protocols": [
+    "icmp"
+  ],
+  "permissive_ingress_ipv4_cidrs": [
+    "0.0.0.0/0",
+    "0.0.0.0/1",
+    "0.0.0.0/2"
+  ],
+  "unrestricted_egress_ipv4_cidrs": [
+    "0.0.0.0/0"
+  ]
+}

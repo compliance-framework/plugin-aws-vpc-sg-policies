@@ -1,10 +1,19 @@
 package compliance_framework.deny_open_database_ports
 
-db_ports := {3306, 5432, 1433}
+public_source(permission) if {
+  cidr := data.public_ipv4_cidrs[_]
+  permission.IpRanges[_].CidrIp == cidr
+}
+
+database_port(port) if {
+  configured_port := data.database_ports[_]
+  port == configured_port
+}
 
 violation[{}] if {
-  input.IpPermissions[_].IpRanges[_].CidrIp == "0.0.0.0/0"
-  db_ports[input.IpPermissions[_].ToPort]
+  permission := input.security_group.IpPermissions[_]
+  public_source(permission)
+  database_port(permission.ToPort)
 }
 
 title := "Database port access should be restricted"
