@@ -1,5 +1,38 @@
 package compliance_framework.deny_public_ingress_on_internet_routable_attachment
 
+risk_templates := [{
+  "name": "Internet-routable workload security group allows public ingress",
+  "title": "Public ingress on internet-routable workload path",
+  "statement": "A security group attached to a workload with an internet-routable subnet path allows public ingress, creating a direct external access path to the attached resource and increasing the chance of unauthorized access or service exposure.",
+  "likelihood_hint": "high",
+  "impact_hint": "high",
+  "violation_ids": ["sg_public_ingress_on_internet_routable_attachment"],
+  "threat_refs": [
+    {
+      "system": "https://cwe.mitre.org",
+      "external_id": "CWE-284",
+      "title": "Improper Access Control",
+      "url": "https://cwe.mitre.org/data/definitions/284.html"
+    },
+    {
+      "system": "https://cwe.mitre.org",
+      "external_id": "CWE-668",
+      "title": "Exposure of Resource to Wrong Sphere",
+      "url": "https://cwe.mitre.org/data/definitions/668.html"
+    }
+  ],
+  "remediation": {
+    "title": "Restrict public ingress on internet-routable attachments",
+    "description": "Remove broad public ingress from security groups attached to workloads that have internet-routable subnet paths unless the exposure is explicitly intended and tightly controlled.",
+    "tasks": [
+      {"title": "Remove public ingress CIDRs from security groups attached to internet-routable workloads"},
+      {"title": "Restrict exposure to approved source networks or front the workload with controlled ingress components"},
+      {"title": "Review attached subnet route tables and internet gateway paths for unintended public reachability"},
+      {"title": "Confirm externally reachable services are explicitly intended and appropriately segmented"}
+    ]
+  }
+}]
+
 context_available if {
   input.sg_context.attached_network_interfaces
 }
@@ -58,7 +91,7 @@ internet_routable_attachment if {
   public_ipv6_route_present
 }
 
-violation[{}] if {
+violation[{"id": "sg_public_ingress_on_internet_routable_attachment"}] if {
   context_available
   permission := input.security_group.IpPermissions[_]
   public_source(permission)
