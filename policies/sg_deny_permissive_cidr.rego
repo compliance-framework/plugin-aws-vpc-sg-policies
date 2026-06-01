@@ -37,5 +37,10 @@ violation[{"id": "sg_permissive_ingress_cidr"}] if {
   input.security_group.IpPermissions[_].IpRanges[_].CidrIp == cidr
 }
 
+violation[{"id": "sg_permissive_ingress_cidr"}] if {
+  cidr := data.permissive_ingress_ipv6_cidrs[_]
+  input.security_group.IpPermissions[_].Ipv6Ranges[_].CidrIpv6 == cidr
+}
+
 title := "CIDR Ingress should be restricted"
 description := "Ingress should be limited to trusted CIDRs and not opened to the wider internet"

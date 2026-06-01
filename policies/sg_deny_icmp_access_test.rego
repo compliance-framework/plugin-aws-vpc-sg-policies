@@ -7,3 +7,11 @@ test_violation_icmp_access if {
     }
   }
 }
+
+test_violation_icmp_access_ipv6 if {
+  count(violation) == 1 with input as {
+    "security_group": {
+      "IpPermissions": [{"Ipv6Ranges": [{"CidrIpv6": "::/0"}], "IpProtocol": "icmp"}]
+    }
+  }
+}

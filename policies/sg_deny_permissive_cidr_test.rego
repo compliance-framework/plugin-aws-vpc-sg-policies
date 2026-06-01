@@ -23,3 +23,11 @@ test_violation_permissive_cidr_3 if {
     }
   }
 }
+
+test_violation_permissive_cidr_ipv6 if {
+  count(violation) == 1 with input as {
+    "security_group": {
+      "IpPermissions": [{"Ipv6Ranges": [{"CidrIpv6": "::/0"}]}]
+    }
+  }
+}

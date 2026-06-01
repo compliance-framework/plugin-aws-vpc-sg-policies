@@ -70,14 +70,6 @@ public_ipv6_route_present if {
   route := route_table.Routes[_]
   cidr := data.public_ipv6_cidrs[_]
   route.DestinationIpv6CidrBlock == cidr
-  route.EgressOnlyInternetGatewayId != ""
-}
-
-public_ipv6_route_present if {
-  route_table := input.sg_context.route_tables_for_attached_subnets[_]
-  route := route_table.Routes[_]
-  cidr := data.public_ipv6_cidrs[_]
-  route.DestinationIpv6CidrBlock == cidr
   internet_gateway_ids[route.GatewayId]
 }
 

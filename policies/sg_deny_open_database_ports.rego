@@ -38,15 +38,26 @@ public_source(permission) if {
   permission.IpRanges[_].CidrIp == cidr
 }
 
-database_port(port) if {
-  configured_port := data.database_ports[_]
-  port == configured_port
+public_source(permission) if {
+  cidr := data.public_ipv6_cidrs[_]
+  permission.Ipv6Ranges[_].CidrIpv6 == cidr
+}
+
+database_port_exposed(permission) if {
+  port := data.database_ports[_]
+  permission.ToPort == port
+}
+
+database_port_exposed(permission) if {
+  port := data.database_ports[_]
+  permission.FromPort <= port
+  permission.ToPort >= port
 }
 
 violation[{"id": "sg_open_database_port_access"}] if {
   permission := input.security_group.IpPermissions[_]
   public_source(permission)
-  database_port(permission.ToPort)
+  database_port_exposed(permission)
 }
 
 title := "Database port access should be restricted"

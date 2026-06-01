@@ -37,6 +37,11 @@ public_source(permission) if {
   permission.IpRanges[_].CidrIp == cidr
 }
 
+public_source(permission) if {
+  cidr := data.public_ipv6_cidrs[_]
+  permission.Ipv6Ranges[_].CidrIpv6 == cidr
+}
+
 icmp_protocol(protocol) if {
   protocol_name := data.icmp_protocols[_]
   protocol == protocol_name

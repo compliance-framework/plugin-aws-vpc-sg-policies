@@ -32,6 +32,9 @@
     "0.0.0.0/1",
     "0.0.0.0/2"
   ],
+  "permissive_ingress_ipv6_cidrs": [
+    "::/0"
+  ],
   "unrestricted_egress_ipv4_cidrs": [
     "0.0.0.0/0"
   ]
