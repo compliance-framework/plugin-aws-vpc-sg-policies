@@ -1,0 +1,2 @@
+lisa-selfreview:
+Self-review pass 1 (strict): no findings. All files match the merged reference (plugin-file-attestation-policies#4) and mock-plugin-policies-1 with pins at v1.5.2; push triggers use main (the default branch); config has no drift from workflows release-please/defaults.json at v1.5.2; seed 0.3.0 = releases/latest, tag v0.3.0 (697b356) is an ancestor of main. actionlint v1.7.12 clean; OPA 1.14.1 build/check/test (41/41) pass; old vs shared opa build commands give byte-identical bundles.
