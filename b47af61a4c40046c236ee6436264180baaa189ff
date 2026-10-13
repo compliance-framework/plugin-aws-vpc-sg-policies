@@ -1,0 +1,5 @@
+lisa-design:
+- Layer 2 of a two-PR stack on ra/w2-s4-t02-opa-fmt (#7, pure opa fmt). This layer: Regal error fixes + workflow swap.
+- Regal unresolved-reference errors (25) come from keys that only exist in policies/data.json; fixed with trailing line-scoped `# regal ignore:unresolved-reference` comments, not a repo .regal/config.yaml (CI would then skip the shared config).
+- Regal warnings (57) are left as they are by decision (fix errors only, 2026-10-13).
+- ci.yml is mock-plugin-policies-1's caller verbatim (workflows v1.5.1 @ 7b55019); release.yml and build-and-upload.yml untouched (W3 replaces them).
