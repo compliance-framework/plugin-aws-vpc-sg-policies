@@ -1,21 +1,21 @@
 package compliance_framework.deny_missing_tags
 
 required_tags[tag] if {
-  tag := data.required_tags[_]
+	tag := data.required_tags[_]
 }
 
 missing_tags[tag] if {
-  required_tags[tag]
-  not tag_exists(input.security_group.Tags, tag)
+	required_tags[tag]
+	not tag_exists(input.security_group.Tags, tag)
 }
 
 violation[{}] if {
-  count(missing_tags) > 0
+	count(missing_tags) > 0
 }
 
 tag_exists(tags, tag_name) if {
-  some tag in tags
-  lower(tag.Key) == lower(tag_name)
+	some tag in tags
+	lower(tag.Key) == lower(tag_name)
 }
 
 title := "Security groups should set required tags"
