@@ -34,22 +34,22 @@ risk_templates := [{
 }]
 
 public_source(permission) if {
-	cidr := data.public_ipv4_cidrs[_]
+	cidr := data.public_ipv4_cidrs[_] # regal ignore:unresolved-reference
 	permission.IpRanges[_].CidrIp == cidr
 }
 
 public_source(permission) if {
-	cidr := data.public_ipv6_cidrs[_]
+	cidr := data.public_ipv6_cidrs[_] # regal ignore:unresolved-reference
 	permission.Ipv6Ranges[_].CidrIpv6 == cidr
 }
 
 database_port_exposed(permission) if {
-	port := data.database_ports[_]
+	port := data.database_ports[_] # regal ignore:unresolved-reference
 	permission.ToPort == port
 }
 
 database_port_exposed(permission) if {
-	port := data.database_ports[_]
+	port := data.database_ports[_] # regal ignore:unresolved-reference
 	permission.FromPort <= port
 	permission.ToPort >= port
 }
