@@ -1,0 +1,3 @@
+lisa-design:
+- Layer 1 of a two-PR stack: pure `opa fmt -w policies` output (OPA 1.14.1), nothing edited by hand. Raw diff is 1122 lines, so the formatting is split from the CI change (W2-S4-T02 size rule).
+- Behaviour proof: parsed ASTs (locations/comments stripped) identical for all 26 files; opa eval of data.compliance_framework identical on 158 inputs x 3 data configs.
