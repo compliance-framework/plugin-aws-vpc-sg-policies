@@ -33,12 +33,12 @@ risk_templates := [{
 }]
 
 violation[{"id": "sg_permissive_ingress_cidr"}] if {
-	cidr := data.permissive_ingress_ipv4_cidrs[_]
+	cidr := data.permissive_ingress_ipv4_cidrs[_] # regal ignore:unresolved-reference
 	input.security_group.IpPermissions[_].IpRanges[_].CidrIp == cidr
 }
 
 violation[{"id": "sg_permissive_ingress_cidr"}] if {
-	cidr := data.permissive_ingress_ipv6_cidrs[_]
+	cidr := data.permissive_ingress_ipv6_cidrs[_] # regal ignore:unresolved-reference
 	input.security_group.IpPermissions[_].Ipv6Ranges[_].CidrIpv6 == cidr
 }
 

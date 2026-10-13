@@ -38,12 +38,12 @@ context_available if {
 }
 
 public_source(permission) if {
-	cidr := data.public_ipv4_cidrs[_]
+	cidr := data.public_ipv4_cidrs[_] # regal ignore:unresolved-reference
 	permission.IpRanges[_].CidrIp == cidr
 }
 
 public_source(permission) if {
-	cidr := data.public_ipv6_cidrs[_]
+	cidr := data.public_ipv6_cidrs[_] # regal ignore:unresolved-reference
 	permission.Ipv6Ranges[_].CidrIpv6 == cidr
 }
 
@@ -60,7 +60,7 @@ internet_gateway_ids[igw_id] if {
 public_ipv4_route_present if {
 	route_table := input.sg_context.route_tables_for_attached_subnets[_]
 	route := route_table.Routes[_]
-	cidr := data.public_ipv4_cidrs[_]
+	cidr := data.public_ipv4_cidrs[_] # regal ignore:unresolved-reference
 	route.DestinationCidrBlock == cidr
 	internet_gateway_ids[route.GatewayId]
 }
@@ -68,7 +68,7 @@ public_ipv4_route_present if {
 public_ipv6_route_present if {
 	route_table := input.sg_context.route_tables_for_attached_subnets[_]
 	route := route_table.Routes[_]
-	cidr := data.public_ipv6_cidrs[_]
+	cidr := data.public_ipv6_cidrs[_] # regal ignore:unresolved-reference
 	route.DestinationIpv6CidrBlock == cidr
 	internet_gateway_ids[route.GatewayId]
 }

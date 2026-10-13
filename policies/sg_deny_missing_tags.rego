@@ -1,7 +1,7 @@
 package compliance_framework.deny_missing_tags
 
 required_tags[tag] if {
-	tag := data.required_tags[_]
+	tag := data.required_tags[_] # regal ignore:unresolved-reference
 }
 
 missing_tags[tag] if {

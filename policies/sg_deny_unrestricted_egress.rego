@@ -33,7 +33,7 @@ risk_templates := [{
 }]
 
 violation[{"id": "sg_unrestricted_egress"}] if {
-	cidr := data.unrestricted_egress_ipv4_cidrs[_]
+	cidr := data.unrestricted_egress_ipv4_cidrs[_] # regal ignore:unresolved-reference
 	input.security_group.IpPermissionsEgress[_].IpRanges[_].CidrIp == cidr
 }
 

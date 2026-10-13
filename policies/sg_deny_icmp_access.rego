@@ -33,17 +33,17 @@ risk_templates := [{
 }]
 
 public_source(permission) if {
-	cidr := data.public_ipv4_cidrs[_]
+	cidr := data.public_ipv4_cidrs[_] # regal ignore:unresolved-reference
 	permission.IpRanges[_].CidrIp == cidr
 }
 
 public_source(permission) if {
-	cidr := data.public_ipv6_cidrs[_]
+	cidr := data.public_ipv6_cidrs[_] # regal ignore:unresolved-reference
 	permission.Ipv6Ranges[_].CidrIpv6 == cidr
 }
 
 icmp_protocol(protocol) if {
-	protocol_name := data.icmp_protocols[_]
+	protocol_name := data.icmp_protocols[_] # regal ignore:unresolved-reference
 	protocol == protocol_name
 }
 

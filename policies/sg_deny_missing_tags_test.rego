@@ -20,7 +20,7 @@ test_no_violation_required_tags_from_policy_data_present if {
 
 test_violation_missing_configured_required_tag if {
 	count(violation) == 1 with input as {"security_group": {"Tags": [{"Key": "owner", "Value": "platform"}]}}
-		with data.required_tags as ["owner", "cost-center"]
+		with data.required_tags as ["owner", "cost-center"] # regal ignore:unresolved-reference
 }
 
 test_no_violation_configured_required_tags_present if {
@@ -28,5 +28,5 @@ test_no_violation_configured_required_tags_present if {
 		{"Key": "OWNER", "Value": "platform"},
 		{"Key": "Cost-Center", "Value": "cc-123"},
 	]}}
-		with data.required_tags as ["owner", "cost-center"]
+		with data.required_tags as ["owner", "cost-center"] # regal ignore:unresolved-reference
 }
